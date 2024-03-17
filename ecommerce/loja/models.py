@@ -1,7 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
+
+class Cliente(models.Model):
+    nome = models.CharField(max_Length=200, nuLL=True, bLank=True)
+    email = models.CharField(max_Length=200, nuLL=True, bLank=True)
+    telefone = models.CharField(max_Length=200, nuLL=True, bLank=True)
+    id_sessao = models.CharField(max_Length=200, nuLL=True, bLank=True)
+    usuario = models.OneToOneField(
+        User, nuLL=True, bLank=True, on_deLete=models.CASCADE)
 
 # _Cliente
 # nome
