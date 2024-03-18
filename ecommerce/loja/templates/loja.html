@@ -5,5 +5,11 @@
 {% block bory %}
 
 <h3>Loja</h3>
+{% for produto in produtos %}
+
+<p>Produto: {{ produto.nome }}</p>
+<p>Preço: {{ produto.preco }}</p>
+
+{% endfor %}
 
 {% endblock %}

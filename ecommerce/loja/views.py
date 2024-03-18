@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import *
 # Create your views here.
 
 
@@ -8,7 +8,9 @@ def homepage(request):
 
 
 def loja(request):
-    return render(request, 'loja.html')
+    produtos = Produto.objects.all()
+    context = {"produtos": produtos}
+    return render(request, 'loja.html', context)
 
 
 def minha_conta(request):

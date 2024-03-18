@@ -28,7 +28,7 @@ class Tipo(models.Model):  # Tipos (Camisa, Camiseta, Bermuda, Calça)
 
 
 class Produto(models.Model):
-    imagem = models.CharField(max_length=400, null=True, blank=True)
+    imagem = models.ImageField(null=True, blank=True)
     nome = models.CharField(max_length=200, null=True, blank=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     ativo = models.BooleanField(default=True)
@@ -36,6 +36,9 @@ class Produto(models.Model):
         Categoria, null=True, blank=True, on_delete=models.SET_NULL)
     tipo = models.ForeignKey(
         Tipo, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"Nome: {self.nome}, Categoria: {self.categoria}, Tipo: {self.tipo}, Preço: {self.preco}"
 
 
 class ItemEstoque(models.Model):
