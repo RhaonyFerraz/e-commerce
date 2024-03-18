@@ -77,44 +77,10 @@ class ItensPedido(models.Model):
     pedido = models.ForeignKey(
         Pedido, null=True, blank=True, on_delete=models.SET_NULL)
 
+    class Banner(models.Model):
+        imagem = models.ImageField(null=True, blank=True)
+        link_destino = models.CharField(max_length=400, null=True, blank=True)
+        ativo = models.BooleanField(default=False)
 
-# _produto
-# imagem
-# nome
-# preço
-# ativo
-# categoria
-# tipo
-
-# _categoria (masculino, feminino, infantil)
-# nome
-
-# _tipos ( camisa, camiseta, bermuda, calça)
-# nome
-
-# _itemestoque
-# produto ( ex ; camisa)
-# tamanho ( ex ; p, m, g)
-# cor (azul, verde, branco)
-# quantidade
-
-# _itenspedido
-# itemestoque (camisa,laranja,M)
-# quantidade  (10 itens)
-
-# -Pedido
-# cliente
-# data_finalizacao
-# finalizado
-# id_transacao
-# endereco
-# itenspedido
-
-# _endereco
-# rua
-# numero
-# complemento
-# cep
-# cidade
-# estado
-# cliente
+        def __str__(self):
+            return f"{self.link_destino} - Ativo: {self.ativo}"

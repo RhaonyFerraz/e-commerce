@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block bory %}
 
 <h3>HomePage</h3>
+
+{% for banner in banners %}
+
+{{ banner }}
+
+{% endfor %}
 
 {% endblock %}
