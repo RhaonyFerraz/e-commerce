@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block bory %}
+
+<h3>{{ produto.nome }}</h3>
+
+<img src="{{ produto.imagem.url }}" width="300" height="450">
+<p>Produto: {{ produto.nome }}</p>
+<p>Preço: {{ produto.preco }}</p>
+
+<button>Adicionar ao Carrinho</button>
+
+{% endblock %}

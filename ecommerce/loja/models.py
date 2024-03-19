@@ -28,7 +28,7 @@ class Tipo(models.Model):  # Tipos (Camisa, Camiseta, Bermuda, Calça)
 
 
 class Produto(models.Model):
-    imagem = models.ImageField(null=True, blank=True)
+    imagem = models.ImageField(null=True, blank=True)  # "camisa.png"
     nome = models.CharField(max_length=200, null=True, blank=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     ativo = models.BooleanField(default=True)
