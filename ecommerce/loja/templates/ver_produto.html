@@ -12,8 +12,8 @@
 <p>Produto: {{ produto.nome }}</p>
 <p>Preço: {{ produto.preco }}</p>
 
-{% if nome_cor_selecionada %}
-Cor: {{ nome_cor_selecionada }}
+{% if cor_selecionada %}
+Cor: {{ cor_selecionada.nome }}
 {% endif %}
 
 {% for cor in cores %}
@@ -23,17 +23,18 @@ Cor: {{ nome_cor_selecionada }}
 {% endfor %}
 
 {% if tamanhos %}
-<p>Selecione o tamanho:</p>
-{% for tamanho in tamanhos %}
+<form method="POST" action="{% url 'adicionar_carrinho' produto.id %}">
+  {% csrf_token %}
+  <p>Selecione o tamanho:</p>
+  {% for tamanho in tamanhos %}
+  <input type="radio" name="tamanho" value="{{ tamanho }}">
+  <label for="{{ tamanho }}">{{ tamanho }}</label>
+  {% endfor %}
 
-<button>{{ tamanho }}</button>
-
-{% endfor %}
-
+  <input type="hidden" nome="cor" value="{{ cor_selecionada.id }}">
+  <button type="submit">Adicionar ao Carrinho</button>
+</form>
 {% endif %}
-
-<button>Adicionar ao Carrinho</button>
-
 {% else %}
 
 <p>Produto fora de estoque</p>
