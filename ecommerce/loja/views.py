@@ -66,3 +66,6 @@ def carrinho(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+
+# TODO sempre que o usuario criar uma conta no site a gente vai criar um cliente para ele
