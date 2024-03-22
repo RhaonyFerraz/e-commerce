@@ -5,6 +5,14 @@
 {% block bory %}
 
 <h3>Carrinho</h3>
+<h4>Número do Pedido: {{ pedido.id }}</h4>
+
+{% for item in itens_pedido %}
+<p>
+    <img src="{{ item.item_estoque.produto.imagem.url }}" width="50" height="70">
+    Produto: {{ item.item_estoque.produto.nome }}; Cor: {{ item.item_estoque.cor.nome }}; Tamanho: {{ item.item_estoque.tamanho }}; Quantidade: {{ item.quantidade }}
+</p>
+{% endfor %}
 
 <a href="{% url 'checkout' %}">Checkout</a>
 
