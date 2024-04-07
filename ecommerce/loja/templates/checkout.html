@@ -5,5 +5,29 @@
 {% block bory %}
 
 <h3>Checkout</h3>
+<a href="{% url 'carrinho' %}">Voltar para Carrinho</a>
+
+<h4>Número do Pedido: {{ pedido.id }}</h4>
+<P>Preço Total Pedido: R${{ pedido.preco_total }}</P>
+<P>Total  Produtos: {{ pedido.quantidade_total }}</P>
+
+<form method="POST" action="">
+   {% csrf_token %}
+   <h3>Selecione o endereço de entrega</h3>
+   {% for endereco in enderecos %}
+   <input type="radio" name="endereco" value="{{ endereco.id }}">
+   <label for="{{ endereco.id }}">{{ endereco.cidade }}-{{ endereco.estado }},
+       {{ endereco.rua }},
+       {{ endereco.numero }},
+       {{ endereco.complemento }} - {{ endereco.cep}}</label>
+   <br>
+   {% endfor %}
+   {% if not request.user.is_authenticated %}
+   <h4>Preencha seu email para finalizar o pedido</h4>
+   <input type="email" name="email" placeholder="email">
+   {% endif %}
+
+</form>
+
 
 {% endblock %}

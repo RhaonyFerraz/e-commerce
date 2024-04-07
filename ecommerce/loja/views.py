@@ -63,7 +63,8 @@ def adicionar_carrinho(request, id_produto):
                 id_sessao = request.COOKIES.get("id_sessao")
             else:
                 id_sessao = str(uuid.uuid4())
-                resposta.set_cookie(key="id_sessao", value=id_sessao)
+                resposta.set_cookie(
+                    key="id_sessao", value=id_sessao, max_age=60*60*24*30)
             cliente, criado = Cliente.objects.get_or_create(
                 id_sessao=id_sessao)
         pedido, criado = Pedido.objects.get_or_create(
@@ -132,7 +133,24 @@ def carrinho(request):
 
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    if request.user.is_authenticated:
+        cliente = request.user.cliente
+    else:
+        if request.COOKIES.get("id_sessao"):
+            id_sessao = request.COOKIES.get("id_sessao")
+            cliente, criado = Cliente.objects.get_or_create(
+                id_sessao=id_sessao)
+        else:
+            context = {"cliente_existente": False,
+                       "itens_pedido": None, "pedido": None}
+            return redirect('loja')
+
+    pedido, criado = Pedido.objects.get_or_create(
+        cliente=cliente, finalizado=False)
+
+    enderecos = Endereco.objects.filter(cliente=cliente)
+    context = {"pedido": pedido, "enderecos": enderecos}
+    return render(request, 'checkout.html', context)
 
 
 # TODO sempre que o usuario criar uma conta no site a gente vai criar um cliente para ele
