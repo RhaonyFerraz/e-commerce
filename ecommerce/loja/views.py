@@ -153,4 +153,9 @@ def checkout(request):
     return render(request, 'checkout.html', context)
 
 
+def adicionar_endereco(request):
+    context = {}
+    return render(request, "adicionar_endereco.html", context)
+
+
 # TODO sempre que o usuario criar uma conta no site a gente vai criar um cliente para ele
