@@ -5,5 +5,17 @@
 {% block bory %}
 
 <h3>Adicionar Endereco</h3>
+<a href="{% url 'checkout' %}">Retornar para a compra</a>
 
+<h3>Adicionar endereco</h3>
+<form method="POST" action="{% url 'adicionar_endereco' %}">
+   {% csrf_token %}
+   <input type="text" name="cidade" placeholder="Cidade">
+   <input type="text" name="estado" placeholder="Estado">
+   <input type="text" name="rua" placeholder="Rua">
+   <input type="number" name="numero" placeholder="Número">
+   <input type="text" name="complemento" placeholder="Complemento">
+   <input type="number" name="cep" placeholder="CEP">
+   <button type="submit">Adicionar Endereço</button>
+</form>
 {% endblock %}

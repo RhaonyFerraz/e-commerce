@@ -154,8 +154,34 @@ def checkout(request):
 
 
 def adicionar_endereco(request):
-    context = {}
-    return render(request, "adicionar_endereco.html", context)
+    if request.method == "POST":
+        # tratar o envio do formulario
+        if request.user.is_authenticated:
+            cliente = request.user.cliente
+        else:
+            if request.COOKIES.get("id_sessao"):
+                id_sessao = request.COOKIES.get("id_sessao")
+                cliente, criado = Cliente.objects.get_or_create(
+                    id_sessao=id_sessao)
+            else:
+                return redirect('loja')
+        dados = request.POST.dict()
+        endereco = Endereco.objects.create(cliente=cliente, rua=dados.get("rua"), numero=int(dados.get("numero")),
+                                           estado=dados.get("estado"), cidade=dados.get("cidade"),
+                                           cep=dados.get("cep"), complemento=dados.get("complemento"))
+        endereco.save()
+        return redirect("checkout")
+    else:
+        context = {}
+        return render(request, "adicionar_endereco.html", context)
+
+
+def minha_conta(request):
+    return render(request, 'usuario/minha_conta.html')
+
+
+def login(request):
+    return render(request, 'usuario/login.html')
 
 
 # TODO sempre que o usuario criar uma conta no site a gente vai criar um cliente para ele
