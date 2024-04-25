@@ -11,10 +11,10 @@
   <div style="display: flex;">
     {% for categoria in categorias %}
     <div>
-        <a href="{% url 'loja' %}{{ categoria.nome }}">{{ categoria.nome }}:</a>
+        <a href="{% url 'loja' %}{{ categoria.slug }}">{{ categoria.nome }}:</a>
         <br>
         {% for tipo in tipos %}
-            <a href="{% url 'loja' %}{{ categoria.nome }}-{{ tipo.nome }}">{{ tipo.nome }}</a>
+            <a href="{% url 'loja' %}{{ categoria.slug }}-{{ tipo.slug }}">{{ tipo.nome }}</a>
         {% endfor %}
     </div>
     {% endfor %}
